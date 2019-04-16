@@ -1,0 +1,17 @@
+<%= form_for @category do |c| %>
+	<% if @category.errors.any? %>
+		
+		<% @category.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+		<% end %>
+ 		
+	<% end %>
+	<br>
+	<label for="category_name">Category Name : </label><br>
+	<%= c.text_field :name %><br>
+
+	<label for="category_desc">Description : </label><br>
+	<%= c.text_area :description %><br>
+
+	<%= c.submit %>
+<% end %>

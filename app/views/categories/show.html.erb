@@ -1,0 +1,23 @@
+<center>
+	<table border="1">
+		<tr><td><center><h2>Name : <%= @category.name %></h2></center></td></tr>
+		<tr><td><h4>Description : <%= @category.description %></h4></td></tr>
+
+		<tr>
+			<td><h4>Article Title :
+				<ul> 
+					<% @articles.each do |a| %>
+						<li><%= a.title %></li>
+					<% end %>
+ 				</ul>
+
+					</h4></td></tr>
+		<tr>
+			<td><b><%= link_to "Edit",edit_category_path(@category.id) %></b>
+			<b><%= link_to "Delete",category_path(@category.id),method: :delete,data: {confirm: "Are you sure ?"} %></b> </p></td>
+		</tr>
+	</table>
+
+
+
+</center>

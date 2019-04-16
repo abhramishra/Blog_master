@@ -1,0 +1,51 @@
+<%= form_for @article do |a| %>
+	
+	<% if @article.errors.any? %>
+		
+		<ul>
+			<% @article.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+		</ul>
+
+		
+	<% end %>
+
+	<label for="article_category_id">Category ID</label><br>
+	<%= a.collection_select :category_id,Category.all, :id, :name,prompt: "Select Category" %> <br><br>
+
+	<label for="article_title">Title : </label><br>
+	<%= a.text_field :title %> <span id="titleHandleMsg"></span><br>
+
+	<label for="article_body">Enter your blog here : </label><br>
+	<%= a.text_area :body %><br>
+
+	
+	<label for="article_published_date">Article Published Date :</label><br>
+	<%= a.date_select :publish_date %><br><br>
+
+	<%= a.check_box :is_published %> <label for="is_published">is published</label><br><br>
+
+	<label for="article_image_url">Image URL : </label><br>
+	<%= a.file_field :feature_image_url %><br>
+
+
+	<%= a.submit %>
+<% end %> 
+<script type="text/javascript">
+	nameHandle = document.getElementById("article_title")
+	titleHandleMsg = document.getElementById("titleHandleMsg")
+	nameHandle.addEventListener('focus',function(){
+		titleHandleMsg.innerHTML = "Enter the product name";
+	},false)
+	nameHandle.addEventListener('blur',function(){
+		if (nameHandle.value == "") {
+			titleHandleMsg.innerHTML = "Name can't be empty";	
+		}
+		else{
+			titleHandleMsg.innerHTML = "";
+		}
+		
+	},false)
+
+</script>

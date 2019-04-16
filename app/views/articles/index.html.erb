@@ -1,0 +1,37 @@
+<h1>Article Details (Total - <%= @article.count %>)</h1>
+
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+<table border="4">
+	<tr>
+		<th>Title</th><th>Description</th><th>Category</th>
+	</tr>
+	<% @article.each do |a| %>
+	
+		<tr>
+			<td><%= a.title %></td>
+			<td><%= a.body %></td>
+			<td><%= link_to "view",article_path(a.id) %></td>
+		</tr>
+	
+	<% end %>
+</table>
+<br><b><%= link_to "Add Article",new_article_path %></b> 
+
+

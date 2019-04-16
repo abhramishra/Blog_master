@@ -1,0 +1,43 @@
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+<center>
+	<table border="1">
+		<tr>
+			<th>Title</th>
+			<th>Body</th>
+			<th>Category</th>
+			<th>Publish Date</th>
+			<th>Published</th>
+			<th>Image</th>
+
+		</tr>
+		<tr>
+			<td><%= @article.title %></td>
+			<td><%= @article.body %></td>
+			<td><%= Category.find(@article.category_id).name %></td>
+			<td><%= @article.publish_date %></td>
+			<td><%= @article.is_published %></td>
+			<td><%= image_tag(@article.feature_image_url.url, size: "50*50") %></td>
+			<td><b><%= link_to "Edit Article",edit_article_path(@article.id) %></b></td>
+			<td><b><%= link_to "Delete",article_path(@article.id),method: :delete,data: {confirm: "Are you sure ?"} %></b></td> 
+
+		</tr>
+
+	</table>
+</center>
