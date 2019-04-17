@@ -2,10 +2,11 @@
 
 <% @category.each do |c| %>
 	<p><b><%= c.name %> (<%= c.articles.length %>)</b> - <%= link_to "show details",category_path(c.id) %>
-	<b><%= link_to "Edit",edit_category_path(c.id) %></b>
-	<!--<b><%= link_to "Delete",category_path(c.id),method: :delete,data: {confirm: "Are you sure ?"} %></b> </p> -->
+	
 	<hr>
 <% end %>
-<br><b><%= link_to "Add Category",new_category_path %></b> 
+<% if (user_signed_in?) && (can? :create, Category.new) %>
+	<br><b><%= link_to "Add Category",new_category_path %></b>
+<% end %> 
 
 

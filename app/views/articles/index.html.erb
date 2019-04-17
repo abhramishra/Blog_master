@@ -32,6 +32,8 @@ tr:nth-child(even) {
 	
 	<% end %>
 </table>
-<br><b><%= link_to "Add Article",new_article_path %></b> 
+<% if (user_signed_in?) && (can? :create, Article.new) %>
+	<br><b><%= link_to "Add Article",new_article_path %></b>
+<% end %> 
 
 

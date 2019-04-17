@@ -34,8 +34,10 @@ tr:nth-child(even) {
 			<td><%= @article.publish_date %></td>
 			<td><%= @article.is_published %></td>
 			<td><%= image_tag(@article.feature_image_url.url, size: "50*50") %></td>
-			<td><b><%= link_to "Edit Article",edit_article_path(@article.id) %></b></td>
-			<td><b><%= link_to "Delete",article_path(@article.id),method: :delete,data: {confirm: "Are you sure ?"} %></b></td> 
+			<% if (user_signed_in?) && (can? :update, @article) %>
+				<td><b><%= link_to "Edit Article",edit_article_path(@article.id) %></b></td>
+				<td><b><%= link_to "Delete",article_path(@article.id),method: :delete,data: {confirm: "Are you sure ?"} %></b></td> 
+			<% end %>
 
 		</tr>
 
