@@ -42,4 +42,34 @@ tr:nth-child(even) {
 		</tr>
 
 	</table>
+
+	<% if @article.reviews.empty? %>
+		<p>No reviews found. Be the first one to review . </p>
+	<% else %>
+		<h3>Listing Reviews</h3>
+		<ol>
+			<% @article.reviews.each do |review| %>
+				<li><b><%= review.user.username  %></b> - <%= review.body %>
+				<% if (user_signed_in?) && (can? :update, review) %>
+					
+					<%= link_to "destroy", review_path(review.id), method: :delete, data: {confirm: "Are you sure?"} %>
+
+				</li>
+				<% end %>
+			
+			<% end %>
+
+		
+	<% end %>
+
+	<%= form_for (@review) do |f| %>
+		<label for="review_body"></label>
+		<%= f.text_area :body %> <br>
+
+		<%= f.hidden_field :article_id, value: @article.id %>
+		<br>
+
+		<%= f.submit "Add review" %>
+	<% end %>
+
 </center>

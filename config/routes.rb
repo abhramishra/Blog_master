@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   devise_for :users
   get 'welcome/index'
+
+  resources :reviews
   resources :categories
   resources :articles 
   root 'welcome#index'

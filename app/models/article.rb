@@ -1,5 +1,9 @@
 class Article < ApplicationRecord
-    mount_uploader :feature_image_url, CoverUploader
+  mount_uploader :feature_image_url, CoverUploader
+
+  extend FriendlyId
+  friendly_id :title,  use: [:slugged, :finders]
+  has_many :reviews
 
   belongs_to :category
 	validates_presence_of :title,:body,:category_id,:publish_date,:feature_image_url
@@ -22,5 +26,7 @@ class Article < ApplicationRecord
 
   	#	end
   	#end
+
+
 
 end

@@ -11,6 +11,8 @@ gem 'devise'
 
 gem 'cancancan'
 
+gem 'friendly_id'
+
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'pry'
 # Use Puma as the app server

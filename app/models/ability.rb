@@ -17,15 +17,25 @@ class Ability
 
   def initialize(user)
     if user.nil?
-        can :read, [Category, Product]
+        can :read, [Category, Article]
     elsif user.role? "admin"
     # user.roles.pluck(:name).include? "admin"
-        can :manage, [Category,Article]
+        can :manage, [Category,Article,Review]
+
+    elsif user.role? "moderator"
+        can :read, [Category,Article,Review]
+        can :create, Review
+        can :update, [Category, Article]
+        can :destroy, Review
     
     elsif user.role? "customer"
     # user.roles.pluck(:name).include? "customer"
 
         can :read, [Category,Article]
+        can [:read, :create], Review 
+        can [:update, :destroy], Review do |review|
+            review.user_id == user.id
+        end
 
     end
 

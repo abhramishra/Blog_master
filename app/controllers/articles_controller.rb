@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
 	before_action :authenticate_user!, except: [:index,:show]
-	load_and_authorize_resource
-	
+	#load_and_authorize_resource
+	load_and_authorize_resource :find_by => :slug
 	def index
 		@article = Article.all
 	end
@@ -20,7 +20,8 @@ class ArticlesController < ApplicationController
 	end
 
 	def show
-		@article = Article.find(params[:id])
+		@article = Article.friendly.find(params[:id])
+		@review = Review.new
 	end
 
 	def edit
@@ -45,6 +46,6 @@ class ArticlesController < ApplicationController
 
 	private
 	def article_params
-		params[:article].permit(:title,:body,:category_id,:publish_date,:feature_image_url,:is_published)
+		params[:article].permit(:title,:body,:category_id,:publish_date,:feature_image_url,:is_published, :slug)
 	end
 end

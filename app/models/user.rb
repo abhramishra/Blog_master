@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-
+  has_many :reviews
   
   has_many :permissions
   has_many :roles, through: :permissions
@@ -17,7 +17,7 @@ class User < ApplicationRecord
 
   def assign_customer_role
   	#binding.pry
-  	Permission.create(user_id: self.id, role_id: Role.last.id)
+  	Permission.create(user_id: self.id, role_id: Role.second.id)
   end 
 
   def role?(role)
